@@ -7,9 +7,9 @@ import org.hibernate.cfg.Configuration;
 import com.akshay.hibernate.entity.Course;
 import com.akshay.hibernate.entity.Instructor;
 import com.akshay.hibernate.entity.InstructorDetail;
-import com.akshay.hibernate.entity.Student;
+import com.akshay.hibernate.entity.Review;
 
-public class CreateCoursesDemo {
+public class GetCoursesAndReviewsDemo {
 
 	public static void main(String[] args) {
 		//create session factory
@@ -19,6 +19,7 @@ public class CreateCoursesDemo {
 									.addAnnotatedClass(Instructor.class)
 									.addAnnotatedClass(InstructorDetail.class)
 									.addAnnotatedClass(Course.class)
+									.addAnnotatedClass(Review.class)
 									.buildSessionFactory();	
 		//create session
 		 Session session = factory.getCurrentSession();
@@ -28,20 +29,10 @@ public class CreateCoursesDemo {
 			session.beginTransaction();
 			
 			//get instuctor
-			int id = 8;
-			Instructor tempInst = session.get(Instructor.class, id);
-			System.out.println(tempInst);
-			System.out.println(tempInst.getCourses());
-			//create courses
-			Course tempCourse1 = new Course("Food eat");
-			Course tempCourse2 = new Course("play game");
-			
-			//add courses to inst
-			tempInst.add(tempCourse1);
-			tempInst.add(tempCourse2);
-			//save courses
-			session.save(tempCourse1);
-			session.save(tempCourse2);
+			int id = 17;
+			Course tempCourse = session.get(Course.class, id);
+			System.out.println("course:\t"+tempCourse);
+			System.out.println("Reviews:\t"+tempCourse.getReviews());
 			System.out.println("commit transaction");
 			session.getTransaction().commit();
 			System.out.println("Done");

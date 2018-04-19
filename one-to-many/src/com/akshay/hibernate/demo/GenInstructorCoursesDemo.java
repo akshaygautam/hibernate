@@ -9,7 +9,7 @@ import com.akshay.hibernate.entity.Instructor;
 import com.akshay.hibernate.entity.InstructorDetail;
 import com.akshay.hibernate.entity.Student;
 
-public class CreateCoursesDemo {
+public class GenInstructorCoursesDemo {
 
 	public static void main(String[] args) {
 		//create session factory
@@ -32,16 +32,6 @@ public class CreateCoursesDemo {
 			Instructor tempInst = session.get(Instructor.class, id);
 			System.out.println(tempInst);
 			System.out.println(tempInst.getCourses());
-			//create courses
-			Course tempCourse1 = new Course("Food eat");
-			Course tempCourse2 = new Course("play game");
-			
-			//add courses to inst
-			tempInst.add(tempCourse1);
-			tempInst.add(tempCourse2);
-			//save courses
-			session.save(tempCourse1);
-			session.save(tempCourse2);
 			System.out.println("commit transaction");
 			session.getTransaction().commit();
 			System.out.println("Done");
